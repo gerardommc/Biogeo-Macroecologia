@@ -1,5 +1,5 @@
 ---
-title: "Biogeografía"
+title: "Biogeografía y Macroecología"
 description: "Licenciatura en Ecología"
 author: "Gerardo Martín"
 output:
@@ -14,15 +14,16 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Procesos en biogeografía
 
-1 [Extinción](Extincion.pdf)
+1. [Extinción](Extincion.pdf)
 
-2 [Dispersión](Dispersion.pdf)
+2. [Dispersión](Dispersion.pdf)
 
-3 [La expansión de rangos](Expansion.pdf)
+3. [La expansión de rangos](Expansion.pdf)
 
-6 [Mecanismos de dispersión](Mecanismos-dispersion.pdf)
+# Procesos que determinan los patrones de distribución a grandes escalas
 
-7 [Tipos de barreras](Barreras.pdf)
+1. Uno
 
-8 [Rutas de dispersión e intercambio biótico](Rutas-dispersion.pdf)
+# Métodos para analizar patrones ecológicos a grandes escalas
 
+1. Uno
