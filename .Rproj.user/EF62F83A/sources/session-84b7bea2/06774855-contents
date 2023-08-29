@@ -1,0 +1,28 @@
+---
+title: "Biogeografía"
+description: "Licenciatura en Ecología"
+author: "Gerardo Martín"
+output:
+   prettydoc::html_pretty:
+      theme: hpstr
+      highlight: github
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Procesos en biogeografía
+
+1 [Extinción](Extincion.pdf)
+
+2 [Dispersión](Dispersion.pdf)
+
+3 [La expansión de rangos](Expansion.pdf)
+
+6 [Mecanismos de dispersión](Mecanismos-dispersion.pdf)
+
+7 [Tipos de barreras](Barreras.pdf)
+
+8 [Rutas de dispersión e intercambio biótico](Rutas-dispersion.pdf)
+
