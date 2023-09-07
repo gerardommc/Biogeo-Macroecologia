@@ -12,6 +12,8 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+Programa de [Biogeografía](Biogeografia.pdf) y de [Macroecología](Macroecologia.pdf).
+
 # Procesos en biogeografía
 
 1. [Extinción](Extincion.pdf)
@@ -22,8 +24,13 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Procesos que determinan los patrones de distribución a grandes escalas
 
-1. Uno
+1. Riqueza de especies a diferentes escalas espaciales.
+2. Relación especie – área.
+3. Variación de la riqueza de especies.
+4. Implicaciones de los procesos históricos para la distribución de la diversidad.
 
 # Métodos para analizar patrones ecológicos a grandes escalas
 
-1. Uno
+1. Bases de datos de diversidad.
+2. Aplicaciones de los sistemas de información geográfica.
+3. Análisis y modelación de los sistemas ecológicos a grandes escales espaciales y temporales.
