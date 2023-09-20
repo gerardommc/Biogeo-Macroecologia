@@ -24,8 +24,8 @@ Programa de [Biogeografía](Biogeografia.pdf) y de [Macroecología](Macroecologi
 
 # Procesos que determinan los patrones de distribución a grandes escalas
 
-1. Riqueza de especies a diferentes escalas espaciales.
-2. Relación especie – área.
+1. [Riqueza de especies a diferentes escalas](Riqueza-escalas.pdf)
+2. [Relación especie – área](Spp-area.pdf)
 3. Variación de la riqueza de especies.
 4. Implicaciones de los procesos históricos para la distribución de la diversidad.
 
