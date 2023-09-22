@@ -26,13 +26,8 @@ Programa de [Biogeografía](Biogeografia.pdf) y de [Macroecología](Macroecologi
 
 1. [Riqueza de especies a diferentes escalas](Riqueza-escalas.pdf)
 2. [Relación especie – área](Spp-area.pdf)
-3. Variación de la riqueza de especies.
-      
-      - [Latitud](Variacion-lat-riqueza.pdf)
-      
-      - [Longitud](Variacion-lon-riqueza.pdf)
-      
-4. Implicaciones de los procesos históricos para la distribución de la diversidad.
+3. [Variación de la riqueza de especies](Variacion-lat-lon-riqueza.pdf)
+4. [Implicaciones de los procesos históricos para la distribución de la diversidad](Implicaciones.pdf)
 
 # Métodos para analizar patrones ecológicos a grandes escalas
 
