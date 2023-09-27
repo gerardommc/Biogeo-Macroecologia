@@ -27,10 +27,10 @@ Programa de [Biogeografía](Biogeografia.pdf) y de [Macroecología](Macroecologi
 1. [Riqueza de especies a diferentes escalas](Riqueza-escalas.pdf)
 2. [Relación especie – área](Spp-area.pdf)
 3. [Variación de la riqueza de especies](Variacion-lat-lon-riqueza.pdf)
-4. [Implicaciones de los procesos históricos para la distribución de la diversidad](Implicaciones.pdf)
+4. Implicaciones de los procesos históricos para la distribución de la diversidad
 
 # Métodos para analizar patrones ecológicos a grandes escalas
 
 1. Bases de datos de diversidad.
 2. Aplicaciones de los sistemas de información geográfica.
-3. Análisis y modelación de los sistemas ecológicos a grandes escales espaciales y temporales.
+3. Análisis y modelación de los sistemas ecológicos a grandes escalas espaciales y temporales.

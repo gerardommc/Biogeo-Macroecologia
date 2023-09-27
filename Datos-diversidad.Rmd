@@ -1,0 +1,26 @@
+---
+title: "Bases de datos de diversidad"
+output: 
+  bookdown::html_document2:
+  toc: true
+  number_sections: true
+  toc_float: true
+  fig_caption: true
+  theme: flatly
+date: "2023-09-27"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Global Biodiversity Information Facility
+
+GBIF es ...
+
+## Naturalista
+
+Naturalista es una iniciativa ...
+
+## Vertnet
+
