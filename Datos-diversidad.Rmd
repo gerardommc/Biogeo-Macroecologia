@@ -119,7 +119,7 @@ writeVector(vect(xy.corr[, c("lon", "lat")]), filename = "Datos/Cachryx", filety
 
 ## Naturalista
 
-Naturalista es una iniciativa ...
+Naturalista ([https://naturalista.mx](https://naturalista.mx)) es una iniciativa de ciencia ciudadana con un proceso de validación gradual por expertos. Las contribuciones a naturalista son hechas por el público en general por medio de fotografías georreferenciadas.
 
 ## Vertnet
 

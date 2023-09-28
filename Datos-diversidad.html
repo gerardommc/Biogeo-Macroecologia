@@ -1518,6 +1518,10 @@ border-radius: 0px;
 <pre class="r"><code>library(dismo)</code></pre>
 <pre><code>## Loading required package: raster</code></pre>
 <pre><code>## Loading required package: sp</code></pre>
+<pre><code>## The legacy packages maptools, rgdal, and rgeos, underpinning this package
+## will retire shortly. Please refer to R-spatial evolution reports on
+## https://r-spatial.org/r/2023/05/15/evolution4.html for details.
+## This package is now running under evolution status 0</code></pre>
 <pre class="r"><code>sp &lt;- gbif(genus = &quot;Cachryx&quot;, species = &quot;defensor&quot;)</code></pre>
 <pre><code>## 169 records found</code></pre>
 <pre><code>## 0-169 records downloaded</code></pre>
@@ -1648,7 +1652,7 @@ writeVector(vect(xy.corr[, c(&quot;lon&quot;, &quot;lat&quot;)]), filename = &qu
 </div>
 <div id="naturalista" class="section level2">
 <h2>Naturalista</h2>
-<p>Naturalista es una iniciativa …</p>
+<p>Naturalista (<a href="https://naturalista.mx">https://naturalista.mx</a>) es una iniciativa de ciencia ciudadana con un proceso de validación gradual por expertos. Las contribuciones a naturalista son hechas por el público en general por medio de fotografías georreferenciadas.</p>
 </div>
 <div id="vertnet" class="section level2">
 <h2>Vertnet</h2>
