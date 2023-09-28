@@ -87,11 +87,33 @@ xy.unicos <- unique(xy.na)
 dim(xy.unicos)
 ```
 
-Como podemos ver, después de eliminar datos faltantes y duplicados sólo tenemos 75 observaciones. De estas algunas tendrán errores de localización, por lo que hay que eliminarlos también. Una manera de hacerlo es teniendo una capa de máscara que contenga el área distribucional aproximada, ó los límites M de nuestra especie, de modo que eliminemos todos lo que quedan fuera de ella. En este caso, tomaremos como área accesibe a toda la península:
+Como podemos ver, después de eliminar datos faltantes y duplicados sólo tenemos 75 observaciones. De estas algunas tendrán errores de localización, por lo que hay que eliminarlos también. Una manera de hacerlo es teniendo una capa de máscara que contenga el área distribucional aproximada, ó los límites M de nuestra especie, de modo que eliminemos todos lo que quedan fuera de ella. En este caso, tomaremos como área accesibe a toda la península ([Descarga aquí](Datos/Peninsula.gpkg)):
 
-```{r}
+```{r fig.height=4, fig.width=6, fig.cap="Mapa del área de estudio con los puntos de presencia. En la poción norte hay algunos puntos en el mar, lo cual es erróneo.", fig.align='center'}
 library(terra)
 v <- vect("Datos/Peninsula.gpkg") #Importando área de estudio
+
+xy.s <- vect(xy.unicos[, c("lat", "lon")])# transformando de df a vector
+
+plot(v); points(xy.s)
+```
+
+
+```{r fig.height=4, fig.width=6, fig.align='center', fig.cap="Mismo mapa anterior con los puntos erróneos removidos."}
+e <- terra::extract(v, xy.s)
+
+e.na <- which(!is.na(e$GID_0))
+
+xy.corr <- xy.unicos[e.na, ]
+
+plot(v); points(xy.corr[, c("lon", "lat")], pch = 20)
+```
+
+Una vez eliminados los puntos, podemos guardar la base de datos limpia como `csv`, ó `gpkg` para uso en sistemas de información geográfica:
+
+```{r echo = T, eval = F}
+write.csv(xy.corr, "Datos/Cachryx.csv", row.names = F)
+writeVector(vect(xy.corr[, c("lon", "lat")]), filename = "Datos/Cachryx", filetype = "GPKG")
 ```
 
 
