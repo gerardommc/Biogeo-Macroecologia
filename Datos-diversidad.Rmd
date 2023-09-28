@@ -2,11 +2,11 @@
 title: "Bases de datos de diversidad"
 output: 
   bookdown::html_document2:
-  toc: true
-  number_sections: true
-  toc_float: true
-  fig_caption: true
-  theme: flatly
+    toc: true
+    number_sections: false
+    toc_float: true
+    fig_caption: true
+    theme: flatly
 date: "2023-09-27"
 ---
 
@@ -14,9 +14,86 @@ date: "2023-09-27"
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Global Biodiversity Information Facility
+Las bases de datos de diversidad contienen información global sobre la distribución geográfica de organismos. Los datos que contienen pueden ser:
 
-GBIF es ...
+1. Coordenadas geográficas donde fue observado un individuo
+2. Polígonos de la distribución
+
+    - Estimados por medio de modelos
+    - Generados a mano con base en los puntos de presencia
+
+A continuación se explica la naturaleza y manera de acceder a algunas de las bases de datos.
+
+## Global Biodiversity Information Facility (GBIF)
+
+GBIF ([https://www.gbif.org](https://www.gbif.org)) es el principal repositorio global de información sobre la biodiversidad. Los datos que contiene provienen de colecciones biológicas (botánicas, zoológicas, etc.) de todo el mundo, incluyendo registros obtenidos en tiempos coloniales. GBIF en realidad es un meta-repositorio, pues importa datos de otros repositorios, haciendo que la colecta de datos sobre biodiversidad sea más sencillo. Los datos que contiene GBIF son principalmente coordenadas geográficas.
+
+Existen dos maneras de acceder a los datos de GBIF:
+
+1. **Directamente del portal**. Descargar los datos por esta vía requiere registro. La ventaja es que una vez abierta una cuenta de usuario, se guardan los detalles de todas las descargas solicitadas y a estas se les asigna un DOI.
+
+2. **Desde R**. El paquete `dismo` (distribution modeling) contiene una función dedicada al la búsqueda y descarga de los datos de GBIF, lo que evita la necesidad de iniciar sesión y solicitar manualmente la descarga de los datos.
+
+### Tutorial de descarga desde el portal
+
+### Tutorial de descarga desde **R**
+
+Para descargar datos de GBIF desde **R** necesitamos primero instalar el paquete `dismo`:
+
+```{r echo = T, eval = F}
+install.packages("dismo")
+```
+
+Una vez instalado, lo cargamos para la sesión de trabajo de **R** y utilizamos la función `gbif`. Para que `dismo` se pueda ejecutar correctamente, necesitamos tener instalados los paquetes `raster` y `sp`. El paquete raster será eliminado próximamente de los repositorios de **R** y será reemplazado por `terra`. Mientas `dismo` no sea compatible con `terra` usaremos  `raster`:
+
+```{r echo = T, eval=T}
+library(dismo)
+
+sp <- gbif(genus = "Cachryx", species = "defensor")
+```
+
+La función `gbif` requiere cuando menos de dos argumentos, `genus` y `species`. Argumentos adicionales pueden ser provistos por ejemplo para restringir la búsqueda a un dominio espacial especfífico. Mientras se realiza la búsqueda, `gbif` responderá indicando el número de registros que ha encontrado. Una vez terminada la descarga, el objeto creado por `gbif` será de tipo  `data.frame`:
+
+```{r echo=T}
+class(sp)
+```
+
+Esta tabla tiene 133 columnas que representan metadatos como identificadores dentro de GBIF, de las colecciones donde están depositados los especímenes, de quien realizó las colectas, fecha el registro, etc. Los datos que nos son de más utilidad son la latitud y longitud. Los nombres de las columnas que las contienen son `lon` y `lat`. Podemos revisar los primeros y últimos 6 datos de las columnas que contienen las coordenadas, para ver que hay observaciones donde faltan las cordenadas.
+
+```{r echo = F}
+knitr::kable(head(sp[, c("lon", "lat")]))
+
+knitr::kable(tail(sp[, c("lon", "lat")]))
+```
+
+El procedimiento habitual, es eliminar esos datos faltantes. En **R**, podemos eliminarlos usando `na.omit`. Antes de eliminar estos datos faltantes, tenemos que crear otro `data.frame` que sólo contenga las coordenadas geográficas:
+
+```{r}
+xy <- subset(sp, select = c("lon", "lat"))
+xy.na <- na.omit(xy)
+```
+
+Otros procedimientos de limpieza son:
+
+- Eliminación de duplicados
+- Eliminación de registros anómalos
+
+La eliminación de duplicados es sencilla. Comenzamos multiplicando longitud y latitud, y usamos el producto para ver cuáles datos no son únicos:
+
+```{r}
+p <- with(xy.na, lon * lat)
+xy.na$p <- p
+xy.unicos <- unique(xy.na)
+dim(xy.unicos)
+```
+
+Como podemos ver, después de eliminar datos faltantes y duplicados sólo tenemos 75 observaciones. De estas algunas tendrán errores de localización, por lo que hay que eliminarlos también. Una manera de hacerlo es teniendo una capa de máscara que contenga el área distribucional aproximada, ó los límites M de nuestra especie, de modo que eliminemos todos lo que quedan fuera de ella. En este caso, tomaremos como área accesibe a toda la península:
+
+```{r}
+library(terra)
+v <- vect("Datos/Peninsula.gpkg") #Importando área de estudio
+```
+
 
 ## Naturalista
 
@@ -24,3 +101,4 @@ Naturalista es una iniciativa ...
 
 ## Vertnet
 
+[Regresar al índice](index.html)

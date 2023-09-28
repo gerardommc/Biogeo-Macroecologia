@@ -1,0 +1,39 @@
+---
+title: "Bases de datos de diversidad"
+output: 
+  bookdown::html_document2:
+    toc: true
+    number_sections: false
+    toc_float: true
+    fig_caption: true
+    theme: flatly
+date: "2023-09-27"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Las bases de datos de diversidad contienen información global sobre la distribución geográfica de organismos. Los datos que contienen pueden ser:
+
+1. Coordenadas geográficas donde fue observado un individuo
+2. Polígonos de la distribución
+
+    - Estimados por medio de modelos
+    - Generados a mano con base en los puntos de presencia
+
+A continuación se explica la naturaleza y manera de acceder a algunas de las bases de datos.
+
+## Global Biodiversity Information Facility (GBIF)
+
+GBIF es el principal repositorio global de información sobre la biodiversidad. Los datos que contiene provienen de colecciones biológicas (botánicas, zoológicas, etc.) de todo el mundo, incluyendo registros obtenidos en tiempos coloniales. GBIF en realidad es un meta-repositorio, pues importa datos de otros repositorios, haciendo que el acceso a datos sobre biodiversidad sea sencillo.
+
+Para descargar 
+
+## Naturalista
+
+Naturalista es una iniciativa ...
+
+## Vertnet
+
+[Regresar al índice](index.html)
