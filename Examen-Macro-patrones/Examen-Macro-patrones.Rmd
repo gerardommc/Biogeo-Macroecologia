@@ -1,0 +1,46 @@
+---
+title: "Examen de Macroecología: procesos que determinan patrones de riqueza"
+author: "Nombre"
+date: "2023-10-02"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Ilustra en los mapas los procesos que se piden
+
+1. Con base en el área de las regiones continentales, indica dónde dominarán los siguientes procesos (2 puntos):
+
+- Especiación
+- Inmigración y extinción
+
+```{r echo = F, fig.align='center'}
+knitr::include_graphics("mundo.png", dpi = 300)
+```
+
+2. Si la especiación es un proceso aleatorio, y la extinción está determinada por la energía disponible, la cual disminuye con la distancia del Ecuador (hacia norte ó sur), indica en el mapa ¿dónde habría mayor riqueza más frecuentemente? (1 punto)
+
+```{r echo=F, fig.align='center'}
+knitr::include_graphics("mundo.png", dpi = 300)
+```
+
+## Preguntas directas
+
+3. ¿Por qué este interacciones como parasitismo, competencia, depredación, comensalismo ó mutualismo no explicarían patrones de riqueza a grandes escalas? (2 puntos)
+
+4. ¿Cuál de los siguientes diseños es más adecuado para medir el efecto del área sobre la riqueza? (2 puntos, ver mapa de referencia)
+
+a. Comparar la riqueza de Mérida, Yucatán, Península de Yucatán, México, Meso América y América del Norte
+b. Comparar la riqueza de Mauricio, Madagascar, Sri Lanka, Indonesia-Papua Nueva Guinea, Australia, Antillas, Groenlandia.
+c. Sudamérica, Norteamérica, Europa, Asia, África, Oceanía
+
+```{r echo = F, fig.align='center', fig.cap="Mapa de referencia para pregunta 4."}
+knitr::include_graphics("mundo-nombres.png", dpi = 300)
+```
+
+5 Justifica brevemente tu respuesta anterior, indica ¿qué factores explicarían la variabilidad que no está relacionada con el área y cómo mejorarías el diseño planteado? (3 puntos)
+
+
+
