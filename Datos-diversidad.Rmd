@@ -36,6 +36,39 @@ Existen dos maneras de acceder a los datos de GBIF:
 
 ### Tutorial de descarga desde el portal
 
+El proceso de obtención de datos desde el portal de [GBIF](https://gbif.org) es genérico, aunque se requiere de inicio de sesión. Una vez iniciada la sesión, es posible realizar un búsqueda simple mediante la herramienta de búsqueda.
+
+```{r echo = F, fig.align='center'}
+knitr::include_graphics("Tutorial-GBIF/01.png", dpi = 200)
+```
+
+```{r echo = F, fig.align='center'}
+knitr::include_graphics("Tutorial-GBIF/02.png", dpi = 200)
+```
+Por ejemplo, podemos buscar la almeja galáctica (**Panopea fantastica**, Sebastián y David 2023):
+
+```{r echo = F, fig.align='center'}
+knitr::include_graphics("Tutorial-GBIF/03.png", dpi = 200)
+```
+
+Al realizar la búsqueda nos encontramos con que, lamentablemente, sólo hay registros de una especie hermana terrestre que habita en el Pacífico norte;
+
+```{r echo = F, fig.align='center'}
+knitr::include_graphics("Tutorial-GBIF/04.png", dpi = 200)
+```
+
+```{r echo = F, fig.align='center'}
+knitr::include_graphics("Tutorial-GBIF/05.png", dpi = 200)
+```
+
+```{r echo = F, fig.align='center'}
+knitr::include_graphics("Tutorial-GBIF/06.png", dpi = 200)
+```
+
+```{r echo = F, fig.align='center'}
+knitr::include_graphics("Tutorial-GBIF/07.png", dpi = 200)
+```
+
 ### Tutorial de descarga desde **R**
 
 Para descargar datos de GBIF desde **R** necesitamos primero instalar el paquete `dismo`:

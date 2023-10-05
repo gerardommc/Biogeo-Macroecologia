@@ -40,7 +40,7 @@ c. Sudamérica, Norteamérica, Europa, Asia, África, Oceanía
 knitr::include_graphics("mundo-nombres.png", dpi = 300)
 ```
 
-5 Justifica brevemente tu respuesta anterior, indica ¿qué factores explicarían la variabilidad que no está relacionada con el área y cómo mejorarías el diseño planteado? (3 puntos)
+5. Justifica brevemente tu respuesta anterior, indica ¿qué factores explicarían la variabilidad que no está relacionada con el área y cómo mejorarías el diseño planteado? (3 puntos)
 
 
 
