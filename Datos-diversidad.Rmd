@@ -51,22 +51,38 @@ Por ejemplo, podemos buscar la almeja galáctica (**Panopea fantastica**, Sebast
 knitr::include_graphics("Tutorial-GBIF/03.png", dpi = 200)
 ```
 
-Al realizar la búsqueda nos encontramos con que, lamentablemente, sólo hay registros de una especie hermana terrestre que habita en el Pacífico norte;
+Al realizar la búsqueda nos encontramos con que, lamentablemente, sólo hay registros de una especie hermana terrestre que habita en el Pacífico norte:
 
 ```{r echo = F, fig.align='center'}
 knitr::include_graphics("Tutorial-GBIF/04.png", dpi = 200)
 ```
 
+Para obtener los datos de la especie que buscamos, deberemos seleccionar la pestaña de Descargas que aparece arriba del mapa donde se muestran los datos existentes:
+
 ```{r echo = F, fig.align='center'}
 knitr::include_graphics("Tutorial-GBIF/05.png", dpi = 200)
 ```
 
-```{r echo = F, fig.align='center'}
-knitr::include_graphics("Tutorial-GBIF/06.png", dpi = 200)
-```
+Entre las opciones posibles de descarga, seleccionaremos `.csv`:
 
 ```{r echo = F, fig.align='center'}
 knitr::include_graphics("Tutorial-GBIF/07.png", dpi = 200)
+```
+
+#### Búsqueda avanzada
+
+Existe la posibilidad de buscar información de manera más refinada, por ejemplo por región geográfica.
+
+```{r, echo=F}
+knitr::include_graphics("Tutorial-GBIF/08.png", dpi = 200)
+```
+
+La descarga con dichos filtros sólo incluirá los datos dentro del polígono especificado.
+
+Otras búsquedas incluyen niveles taxonómicos superiores a especie, género, familia etc., ó todos combinados por región geográfica. Además de especificar un polígono a mano alzada, también se puede hacer búsqueda y descarga por el nombre de la región geográfica, fecha, colección de procedencia, precisión, etc.
+
+```{r echo=F}
+knitr::include_graphics("Tutorial-GBIF/09.png", dpi = 200)
 ```
 
 ### Tutorial de descarga desde **R**
@@ -153,6 +169,24 @@ writeVector(vect(xy.corr[, c("lon", "lat")]), filename = "Datos/Cachryx", filety
 ## Naturalista
 
 Naturalista ([https://naturalista.mx](https://naturalista.mx)) es una iniciativa de ciencia ciudadana con un proceso de validación gradual por expertos. Las contribuciones a naturalista son hechas por el público en general por medio de fotografías georreferenciadas.
+
+### Tutorial de descarga desde R
+
+```{r echo = T}
+library(rinat)
+
+sp1 <- get_inat_obs(taxon_name = "Cachryx defensor")
+```
+
+```{r echo = F}
+knitr::kable(head(sp1))
+```
+
+```{r}
+dim(sp1)
+```
+
+
 
 ## Vertnet
 
