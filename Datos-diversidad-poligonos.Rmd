@@ -1,0 +1,26 @@
+---
+title: "Bases de datos de diversidad: áreas de distribución"
+output: 
+  bookdown::html_document2:
+    toc: true
+    number_sections: false
+    toc_float: true
+    fig_caption: true
+    theme: flatly
+date: "2023-09-27"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Los datos de distribuciones son menos comunes que los puntos de presencia. Una de las razones es que su generación requiere, de inicio, los puntos de presencia y su análisis posterior. Por lo tanto siempre existe un retraso en la estimación de las distribuciones geográficas. Las distribuciones geográficas pueden estar disponibles como polígonos, ó capas raster. Las capas raster a su vez, pueden contener los valores de favorabilidad ambiental predichos por algún método estadístico de análisis. Algunas de las fuentes de áreas de distribución son:
+
+1. El [Geoportal](http://geoportal.conabio.gob.mx/) de CONABIO (sólo para México).
+2. La lista roja de la Unión Internacional para la Conservación de la Naturaleza ([IUCN](https://www.iucnredlist.org/en), sólo para especies evaluadas).
+3. Global Assessment of Reptile Distributions ([GARD](http://www.gardinitiative.org/data.html), sólo para reptiles).
+
+Ninguna de estas bases de datos es accesible desde **R**. Los datos que se obtienen, sin embargo, sí se pueden importar a **R** para su uso en análisis.
+
+El uso de cada base de datos es diferente. Por ejemplo, de las tres sólo IUCN requiere registro y un período de espera para obtención de los datos; el geoportal de CONABIO tiene una interfaz geográfica que usa Open Street Maps de fondo y permite ver en tiempo real los datos disponibles para descargar que pueden ser registros de presencia, distribuciones geográficas ó predicciones de favorabilidad; mientras que GARD tiene datos distribucionales y de atributos biológicos con cobertura global, pero almacenados en repositorios dispersos y funciona sólo como un compendio de información, lo que requiere de mucho escrutinio.
+

@@ -1,5 +1,5 @@
 ---
-title: "Bases de datos de diversidad"
+title: "Aplicaciones de sistemas de información geográfica"
 output: 
   bookdown::html_document2:
     toc: true
@@ -14,26 +14,63 @@ date: "2023-09-27"
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-Las bases de datos de diversidad contienen información global sobre la distribución geográfica de organismos. Los datos que contienen pueden ser:
+Muchas aplicaciones de sistemas de información geográfica en macroecología requieren de análisis estadísticos. La plataforma por excelencia para realizarlos es **R**, aún más con las excelentes capacidades de **R** por sí solo como SIG. En este tutorial veremos cómo:
 
-1. Coordenadas geográficas donde fue observado un individuo
-2. Polígonos de la distribución
+1. Importar datos geográficos: puntos, líneas, polígonos y raster
+2. Transformar entre tipos de datos
+3. Reproyectar datos
+4. Hacer un análisis de regresión con los datos geográficos
 
-    - Estimados por medio de modelos
-    - Generados a mano con base en los puntos de presencia
+    - Interpretar el análisis
+    
+## Importar datos
 
-A continuación se explica la naturaleza y manera de acceder a algunas de las bases de datos.
+Al igual que en el tutorial de GBIF utilizaremos el paquete `terra` para importar y manipular todos los datos geográficos. De los datos usados, los puntos, líneas y polígonos pueden ser manejados como vectoriales. Las extensiones de archivo más comunes para estos son `gpkg` y `shp`. Los puntos, por carecer de más características geométricas son más sencillos y se les suele también encontrar como `csv`.
 
-## Global Biodiversity Information Facility (GBIF)
+Comenzaremos cargando el paquete `terra`, y la [capa vectorial](Datos/Peninsula.gpkg) de Yucatán, Campeche y Quitana Roo:
 
-GBIF es el principal repositorio global de información sobre la biodiversidad. Los datos que contiene provienen de colecciones biológicas (botánicas, zoológicas, etc.) de todo el mundo, incluyendo registros obtenidos en tiempos coloniales. GBIF en realidad es un meta-repositorio, pues importa datos de otros repositorios, haciendo que el acceso a datos sobre biodiversidad sea sencillo.
+```{r echo = T, message=F}
+library(terra); library(tidyr)
+py <- vect("Datos/Peninsula.gpkg")
+```
 
-Para descargar 
+el objeto `py` es el que contiene la capa, y podemos ver su tabla de atributos imprimiendo el objeto como un `data.frame` (usando la sintaxis de `tidyr`):
 
-## Naturalista
+```{r echo = T}
+py |> as.data.frame()
+```
 
-Naturalista es una iniciativa ...
+Para ver la proyección geográfica de la capa:
 
-## Vertnet
+```{r echo=T}
+crs(py, describe = T)
+```
 
-[Regresar al índice](index.html)
+Para importar capas de líneas se usa la misma función `vect`. Para importar datos de puntos, podemos usar `read.csv` ó `vect` dependiendo de la extensión del archivo. Si los datos los obtuvimos de GBIF serán [`csv`](Datos/Cachryx.csv). Si los datos de GBIF lo hemos limpiado con anterioridad, es posible que los hayamos guarado como `gpkg` ó `shp`:
+
+```{r echo = T}
+cd.csv <- read.csv("Datos/Cachryx.csv")
+cd.gpkg <- vect("Datos/Cachryx.csv")
+```
+
+Al verificar la proyección de estos datos, podemos ver que está vacía:
+
+```{r echo = T}
+crs(cd.gpkg, describe = T)
+```
+
+y podemos expecificarla utilizando la proyección de la capa vectorial de la península, si de antemano sabemos que tienen la misma:
+
+```{r echo = T}
+crs(cd.gpkg) <- crs(py)
+crs(cd.gpkg, describe = T)
+```
+
+Para especificar la proyección de puntos importados desde un `csv`, necesitamos transformarlo a un objeto reconocible por terra:
+
+```{r echo = T}
+cd.v <- vect(cd.csv)
+crs(cd.v) <- crs(py)
+crs(cd.v, describe = T)
+```
+
