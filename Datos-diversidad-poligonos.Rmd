@@ -7,6 +7,7 @@ output:
     toc_float: true
     fig_caption: true
     theme: flatly
+bibliography: Macroecologia.bib
 date: "2023-09-27"
 ---
 
@@ -23,4 +24,46 @@ Los datos de distribuciones son menos comunes que los puntos de presencia. Una d
 Ninguna de estas bases de datos es accesible desde **R**. Los datos que se obtienen, sin embargo, sí se pueden importar a **R** para su uso en análisis.
 
 El uso de cada base de datos es diferente. Por ejemplo, de las tres sólo IUCN requiere registro y un período de espera para obtención de los datos; el geoportal de CONABIO tiene una interfaz geográfica que usa Open Street Maps de fondo y permite ver en tiempo real los datos disponibles para descargar que pueden ser registros de presencia, distribuciones geográficas ó predicciones de favorabilidad; mientras que GARD tiene datos distribucionales y de atributos biológicos con cobertura global, pero almacenados en repositorios dispersos y funciona sólo como un compendio de información, lo que requiere de mucho escrutinio.
+
+Existen otras fuentes de datos públicas compartidas en servicios de alojamiento como Data Dryad. Un ejemplo de repositorio es [PHYLACINE](https://datadryad.org/stash/dataset/doi:10.5061/dryad.bp26v20) (@faurby_phylacine_2018), el atlas filognético de la macroecología de los mamíferos.
+
+Cuando la cantidad de datos es menor, también hay publicaciones que utilizan servicios como github para almacenar y compartir sus datos. @guerrero-ramirez_global_2021, por ejemplo han publicado [GRooT](https://groot-database.github.io/GRooT/#two) (Global Root Trait Database).
+
+A continuación veremos un tutorial para acceder a las bases de datos publicadas en Dryad
+
+## Acceso a Dryad
+
+Comenzaremos instalando y cargando el paquete `rdryad`:
+
+```{r echo = T, eval = F}
+install.packages("rdryad")
+```
+
+```{r echo = T}
+library(rdryad)
+```
+
+Con este paquete accederemos a [PHYLACINE](https://datadryad.org/stash/dataset/doi:10.5061/dryad.bp26v20), primero identificando el número Dryad con el DOI, y después descargando por medio de la función `dryad_files_download`, a la que hay que indicar el número identificador obtenido desde Dryad o la publicación:
+
+```{r echo=F, fig.align='center'}
+knitr::include_graphics("Tutorial-GBIF/DOIs.png", dpi = 200)
+```
+
+Del DOI eliminamos la parte `https://doi.org/` y sólo usamos `10.5061/dryad.bp26v20`. Extracción de ids y descarga de los datos:
+
+```{r echo = T}
+id.dryad <- dryad_dataset(dois = "10.5061/dryad.bp26v20")
+id <- id.dryad$`10.5061/dryad.bp26v20`$id
+```
+
+De aquí podemos descargar archivos disponibles:
+
+```{r echo = T, eval=F}
+dryad_files_download(ids = id)
+```
+
+En el caso de PHYLACINE, es una base de datos grande, por lo que tardará unos minutos en descargar. Veremos en el tutorial de SIG, cómo podríamos usar PHYLACINE.
+
+# Referencias
+
 

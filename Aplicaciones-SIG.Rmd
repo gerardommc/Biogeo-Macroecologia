@@ -74,3 +74,96 @@ crs(cd.v) <- crs(py)
 crs(cd.v, describe = T)
 ```
 
+## Reproyectar datos
+
+El sistema de coordenadas más común es WGS84, que en la lista EPSG tiene el número 4326. WGS84 tiene coordenadas polares, medidas en grados, lo que quiere decir que son coordenadas geográficas y se deben utilizar para ubicar objetos en la superficie terrestre. Cuando queremos medir distancias ó áreas, necesitamos coordenadas proyectadas, que representen la superficie de la tierra con la menor cantidad de distorsiones en una superficie plana como la pantalla de la computadora. Los sistemas de coordenadas están diseñados para regiones específicas, y las podemos encontrar utilizando el nombre de la región y los códigos EPSG. En QGIS podemos buscar los sistemas de coordenadas haciendo click en el botón "EPSG" de al esquina inferior derecha:
+
+```{r echo = F, fig.align='center'}
+knitr::include_graphics("Tutorial-aplicaciones/Proyeccion.png", dpi = 150)
+```
+
+El sistema por defecto es precisamente EPSG, con cobertura global:
+
+```{r echo = F, fig.align='center'}
+knitr::include_graphics("Tutorial-aplicaciones/EPSG-dialogo.png", dpi = 200)
+```
+
+En esta ventana podemos buscar sistemas de coordenadas propias de una región geográfica. Para México por ejemplo, está ITRF2008, EPSG:6363.
+
+```{r echo = F, fig.align='center'}
+knitr::include_graphics("Tutorial-aplicaciones/ITRF2008.png", dpi = 200)
+```
+
+
+Además, hay proyecciones para zonas específicas, como la zona 16N de ITRF2008 (EPSG:6371):
+
+```{r echo=F, fig.align='center'}
+knitr::include_graphics("Tutorial-aplicaciones/ITRF2008-16N.png", dpi = 200)
+```
+
+Una vez identificadas las proyecciones adecuadas para nuestros datos, haremos el cambio de proyección a ITRF2008-16N (EPSG:6371):
+
+```{r echo = T, fig.height=4, fig.width=6, fig.align='center'}
+cd.v.it <- project(cd.v, "EPSG:6371")
+py.it <- project(py, "EPSG:6371")
+plot(py.it); points(cd.v.it)
+```
+
+El sistema de referencia de las coordenadas es importante cuando necesitamos calcular áreas ó distancias. En macroecología y biogeografía entonces, es de muy alta importancia poder estimar adecuadamente las áreas.
+
+## Análisis de regresión con datos geográficos
+
+Importaremos aquí las distribuciones de mamíferos de PHYLACINE, para hacer un análisis de las variables ambientales a que está asociada la riqueza. Comenzaremos importando las distribuciones con la función `rast` de `terra`. A esta función le podemos dar uno ó cientos de nombres de archivos para generar una capa raster con múltiples bandas. La lista de archivos podemos crearla con `list.files`:
+
+```{r echo = T}
+f <- list.files("../Current/Current/", pattern = ".tif", full.names = T)
+length(f)
+```
+
+Como podemos ver, hay 5831 archivos raster con extensión `tif`, de ahí que a `list.files` primero le indicamos en qué carpeta buscar (`../Current/Current/`) y después la cadena de texto que debe identificar en los archivos, que es la extensión. Una vez generada la lista de archivos, la importamos con `rast`:
+
+```{r echo = T}
+r <- rast(f)
+```
+
+Debido a que ahora el objeto `r` tiene 5831 capas, es poco factible graficar todas las capas, aunque podemos mostrar un par de las distribuciones que contiene:
+
+```{r echo=T, fig.align='center', fig.height=3, fig.width=6}
+plot(r[[400]])
+```
+
+Para ver la riqueza global de mamíferos, podemos hacer la suma de todas las capas, de modo que obtengamos el número de especies por píxel:
+
+```{r echo=T, fig.align='center', fig.height=3, fig.width=6}
+riq <- sum(r)
+plot(riq)
+```
+
+Como podemos ver, estos datos contienen las especies marinas y terrestres. Podríamos extraer las spp. terrestres usando como máscara una capa vectorial de las regiones terrestres:
+
+```{r echo = T, fig.align='center', fig.height=3, fig.width=6, message=FALSE, warning=F}
+library(maptools)
+data("wrld_simpl")
+m <- vect(wrld_simpl)
+m <- project(m, "EPSG:4326")
+plot(m)
+```
+
+```{r echo=T}
+riq <- project(riq, "EPSG:4326")
+riq.ter <- mask(riq, m)
+plot(riq.ter)
+```
+
+Para hacer un análisis de regresión usando la riqueza como variable dependiente de un conjunto de variables climáticas debemos transformar la capa raster de riqueza a tabla:
+
+```{r echo = T}
+riq.df <- as.data.frame(riq, xy = T)
+riq.df$sum <- round(riq.df$sum, 0)
+knitr::kable(head(riq.df))
+```
+
+Ahora, importaremos las variables bioclimáticas de [Chelsa](https://envicloud.wsl.ch/#/?prefix=chelsa%2Fchelsa_V2%2FGLOBAL%2F) para usar como variables independientes de nuestro modelo de regresión.
+
+
+
