@@ -166,8 +166,12 @@ plot(bio.res)
 Para hacer un análisis de regresión usando la riqueza como variable dependiente de un conjunto de variables climáticas debemos transformar la capa raster de riqueza a tabla. Antes de ello, necesitamos cambiar el sistema de coordenadas de las capas de riqueza y climáticas a una proyección que preserve mejor las áreas que el sistema de coordenadas geográficas WGS84:
 
 ```{r echo = T}
+m.88 <- project(m, "EPSG:8857")
 riq.88 <- project(riq.ter, "EPSG:8857")
 bio.88 <- project(bio.res, "EPSG:8857")
+
+riq.88 <- mask(riq.88, m.88)
+bio.88 <- mask(bio.88, m.88)
 ```
 
 Transformando de raster a tabla:
@@ -211,10 +215,15 @@ summary(m1)
 
 De acuerdo con este análisis todas las variables afectan significativamente la riqueza. Ahora veremos cómo representa este modelo los patrones de riqueza:
 
-```{r echo = T}
+```{r echo=T, fig.height=6, fig.width=6, fig.align='center'}
 p <- predict(m1)
-riq.df$pred.riq <- p
+riq.df$pred.riq <- exp(p)
 riq.pred <- rast(riq.df)
-plot(riq.pred[["pred.riq"]])
+par(mfrow = c(2, 1))
+plot(riq.pred[["pred.riq"]], main = "Modelo")
+plot(riq.pred[["sum"]], main = "Observada")
 ```
 
+Podemos ver que de manera general, las tres variables sí influencian la riqueza, aunque los mecanismos precisos no los hemos dilucidado aún.
+
+[Regresar al índice del curso](index.html)
