@@ -94,7 +94,6 @@ En esta ventana podemos buscar sistemas de coordenadas propias de una región ge
 knitr::include_graphics("Tutorial-aplicaciones/ITRF2008.png", dpi = 200)
 ```
 
-
 Además, hay proyecciones para zonas específicas, como la zona 16N de ITRF2008 (EPSG:6371):
 
 ```{r echo=F, fig.align='center'}
@@ -139,7 +138,7 @@ riq <- sum(r)
 plot(riq)
 ```
 
-Como podemos ver, estos datos contienen las especies marinas y terrestres. Podríamos extraer las spp. terrestres usando como máscara una capa vectorial de las regiones terrestres:
+Como podemos ver, estos datos contienen las especies marinas y terrestres. Podríamos extraer las spp. terrestres usando como máscara una capa vectorial de las regiones terrestres. De paso, la proyectaremos a el sistema de coordenadas proyectadas global para tratar de preservar en la mayor medida posible las áreas de los polos:
 
 ```{r echo = T, fig.align='center', fig.height=3, fig.width=6, message=FALSE, warning=F}
 library(maptools)
@@ -155,15 +154,67 @@ riq.ter <- mask(riq, m)
 plot(riq.ter)
 ```
 
-Para hacer un análisis de regresión usando la riqueza como variable dependiente de un conjunto de variables climáticas debemos transformar la capa raster de riqueza a tabla:
+Ahora, importaremos las variables bioclimáticas de [Chelsa](https://envicloud.wsl.ch/#/?prefix=chelsa%2Fchelsa_V2%2FGLOBAL%2F) para usar como variables independientes de nuestro modelo de regresión. De Chelsa usaremos las variables bioclimáticas 1, 7 y 12 (temperatura anual promedio, rango anual de temperatura y precipitación total). Estas variables también están en formato `tif` y las podemos importar y proyectar con `terra`:
+
+```{r echo=T, fig.height=3, fig.width=6, fig.align='center'}
+bio <- rast(paste0("../Current/bio",c(1, 7, 12), ".tif"))
+bio.res <- resample(bio, riq, method = "lanczos")
+bio.res <- mask(bio.res, m)
+plot(bio.res)
+```
+
+Para hacer un análisis de regresión usando la riqueza como variable dependiente de un conjunto de variables climáticas debemos transformar la capa raster de riqueza a tabla. Antes de ello, necesitamos cambiar el sistema de coordenadas de las capas de riqueza y climáticas a una proyección que preserve mejor las áreas que el sistema de coordenadas geográficas WGS84:
 
 ```{r echo = T}
-riq.df <- as.data.frame(riq, xy = T)
+riq.88 <- project(riq.ter, "EPSG:8857")
+bio.88 <- project(bio.res, "EPSG:8857")
+```
+
+Transformando de raster a tabla:
+
+```{r echo = T}
+todos <- c(bio.88, riq.88)
+riq.df <- as.data.frame(todos, xy = T)
 riq.df$sum <- round(riq.df$sum, 0)
 knitr::kable(head(riq.df))
 ```
 
-Ahora, importaremos las variables bioclimáticas de [Chelsa](https://envicloud.wsl.ch/#/?prefix=chelsa%2Fchelsa_V2%2FGLOBAL%2F) para usar como variables independientes de nuestro modelo de regresión.
+Ahora, podemos hacer un análisis exploratorio, viendo por ejemplo los gráficos de dispersión de la riqueza como función de las variables bioclimáticas:
 
+```{r echo=T, fig.height=4, fig.width=5, fig.align='center', message = F, warning=F}
+library(ggplot2)
 
+ggplot(riq.df) + geom_point(aes(x = bio1, y = sum)) + 
+  geom_smooth(aes(x = bio1 , y = sum), method = "gam") +
+  labs(y = "Riqueza")
+ggplot(riq.df) + geom_point(aes(x = bio7, y = sum)) + 
+  geom_smooth(aes(x = bio7 , y = sum), method = "gam") + 
+  labs(y = "Riqueza")
+ggplot(riq.df) + geom_point(aes(x = bio12, y = sum)) + 
+  geom_smooth(aes(x = bio12 , y = sum), method = "gam")+ 
+  labs(y = "Riqueza")
+
+```
+
+Para analizar la riqueza utilizaremos un modelo lineal generalizado Poisson, utilizando los siguientes términos:
+
+1. **Bio1**: lineal
+2. **Bio7**: lineal y cuadrático
+3. **Bio12**: lineal y cuadrático
+
+```{r echo = T}
+m1 <- glm(sum ~ bio1 + bio7 + I(bio7^2) + 
+            bio12 + I(bio12^2), 
+          data = riq.df, family = "poisson")
+summary(m1)
+```
+
+De acuerdo con este análisis todas las variables afectan significativamente la riqueza. Ahora veremos cómo representa este modelo los patrones de riqueza:
+
+```{r echo = T}
+p <- predict(m1)
+riq.df$pred.riq <- p
+riq.pred <- rast(riq.df)
+plot(riq.pred[["pred.riq"]])
+```
 
