@@ -19,21 +19,16 @@ donde $S$ es la riqueza o número de especies en el $i-$ésimo píxel y $\alpha$
 
 ## Procesos descritos por medio del modelo
 
-### Temperatura
-
-Disponibilidad de energía, influenciada por elevación y topografía en general
-
-### Variabilidad de temperatura
-
-Amplitud del nicho ecológico, incertidumbre de las condiciones, tamaño de las áreas distribucionales, probabilidad de extinción
-
-### Disponibilidad de acua
-
-Hipótesis energía-agua.
+1. **Temperatura**. Disponibilidad de energía, influenciada por elevación y topografía en general.
+2. **Variabilidad de temperatura**. Amplitud del nicho ecológico, incertidumbre de las condiciones, tamaño de las áreas distribucionales, probabilidad de extinción.
+3. **Precipitación**. Hipótesis energía-agua.
 
 ## Procesos no descritos por el modelo
 
-Efecto del área, procesos de especiación, inmigración y extinción, aislamiento.
+1. Área
+2. Tiempo ecológico y evolutivo
+3. Inmigración y extinción
+4. Aislamiento
 
 ## El modelo general de simulación
 
@@ -45,6 +40,29 @@ Efecto del área, procesos de especiación, inmigración y extinción, aislamien
 4. Toma en cuenta límites fisiológicos de tolerancia
 
 Cada uno de estos aspectos debería ser controlable por el usuario y sería lo suficientemente general para representar los procesos que dan origen a los patrones de riqueza de muchos grupos.
+
+## Consideraciones generales de modelación en macroecología
+
+@connolly2017 hace una distinción muy detallada de las diferencias entre modelos mecanísticos (MM), basados en procesos (MBP) y estadísticos (ME):
+
+1. **Modelos estadísticos**. Sólo estiman asociaciones sin representar causalidad alguna.
+2. **Modelos mecanísticos**. Representan de manera detallada los mecanismos biológicos subyacentes.
+3. **Modelos basados en procesos**. Representan la interacción entre componentes clave del sistema ecológico, pero no los mecanismos biológicos subyacentes.
+
+### Ejemplos:
+
+El siguiente modelo es meramente estadístico:
+
+$$ \log S = \alpha + \beta_1 Bio_1 + \beta_2 Bio_7 + \beta_2' Bio_7 ^2 + \beta_3 Bio_{12} + \beta_3' Bio_{12} ^2 $$
+
+pues no representa de ninguna manera qué sucede con las diferentes especies bajo las diferentes condiciones climáticas.
+
+El modelo de *Bradypus variegatus* también es estadístico, sólo representa la asociación entre la densidad de puntos y las condiciones climáticas donde están presentes dichos puntos.
+
+Modelos biofísicos como el de @kearney2009, utilizan propiedades físicas de los organismos como tamaño del cuerpo, color, eficiencia de conversión de calorías y evapotranspiración para representar nichos fundamentales, lo cual logra capturar de manera parcial muchos fenómenos que subyacen a lo que representan modelos estadísticos de distribuciones geográficas.
+
+Finalmente, los componentes del sistema qeu definen los MBP, serían como el de MacArthur de biogeografía de islas, que representan el número de especies como función de la inmigración y extinción, pero omiten las dinámicas de las diferentes especies en la isla, sus interacciones, el efecto del clima y las dificultades por las que pasaron para colonizar dicha isla
+
 
 [Regresar al índice del curso](index.html)
 

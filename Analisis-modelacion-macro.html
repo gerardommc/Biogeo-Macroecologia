@@ -1516,22 +1516,20 @@ border-radius: 0px;
 <p>donde <span class="math inline">\(S\)</span> es la riqueza o número de especies en el <span class="math inline">\(i-\)</span>ésimo píxel y <span class="math inline">\(\alpha\)</span> y <span class="math inline">\(\beta\)</span> son los coeficientes estimados. Vimos que este modelo capturó bien algunas tendencias bien documentadas, como que la riqueza disminuye con la distancia del ecuador. La variable que hizo posible este efecto fue <span class="math inline">\(Bio_1\)</span>, puesto que la temperatura promedio anual se correlaciona negativamente con la distancia del ecuador. Las otras variables <span class="math inline">\(Bio_7\)</span> y <span class="math inline">\(Bio_{12}\)</span> representan la variabilidad de temperatura y disponibilidad de agua respectivamente.</p>
 <div id="procesos-descritos-por-medio-del-modelo" class="section level2">
 <h2>Procesos descritos por medio del modelo</h2>
-<div id="temperatura" class="section level3">
-<h3>Temperatura</h3>
-<p>Disponibilidad de energía, influenciada por elevación y topografía en general</p>
-</div>
-<div id="variabilidad-de-temperatura" class="section level3">
-<h3>Variabilidad de temperatura</h3>
-<p>Amplitud del nicho ecológico, incertidumbre de las condiciones, tamaño de las áreas distribucionales, probabilidad de extinción</p>
-</div>
-<div id="disponibilidad-de-acua" class="section level3">
-<h3>Disponibilidad de acua</h3>
-<p>Hipótesis energía-agua.</p>
-</div>
+<ol style="list-style-type: decimal">
+<li><strong>Temperatura</strong>. Disponibilidad de energía, influenciada por elevación y topografía en general.</li>
+<li><strong>Variabilidad de temperatura</strong>. Amplitud del nicho ecológico, incertidumbre de las condiciones, tamaño de las áreas distribucionales, probabilidad de extinción.</li>
+<li><strong>Precipitación</strong>. Hipótesis energía-agua.</li>
+</ol>
 </div>
 <div id="procesos-no-descritos-por-el-modelo" class="section level2">
 <h2>Procesos no descritos por el modelo</h2>
-<p>Efecto del área, procesos de especiación, inmigración y extinción, aislamiento.</p>
+<ol style="list-style-type: decimal">
+<li>Área</li>
+<li>Tiempo ecológico y evolutivo</li>
+<li>Inmigración y extinción</li>
+<li>Aislamiento</li>
+</ol>
 </div>
 <div id="el-modelo-general-de-simulación" class="section level2">
 <h2>El modelo general de simulación</h2>
@@ -1543,13 +1541,37 @@ border-radius: 0px;
 <li>Toma en cuenta límites fisiológicos de tolerancia</li>
 </ol>
 <p>Cada uno de estos aspectos debería ser controlable por el usuario y sería lo suficientemente general para representar los procesos que dan origen a los patrones de riqueza de muchos grupos.</p>
+</div>
+<div id="consideraciones-generales-de-modelación-en-macroecología" class="section level2">
+<h2>Consideraciones generales de modelación en macroecología</h2>
+<p><span class="citation">Connolly et al. (2017)</span> hace una distinción muy detallada de las diferencias entre modelos mecanísticos (MM), basados en procesos (MBP) y estadísticos (ME):</p>
+<ol style="list-style-type: decimal">
+<li><strong>Modelos estadísticos</strong>. Sólo estiman asociaciones sin representar causalidad alguna.</li>
+<li><strong>Modelos mecanísticos</strong>. Representan de manera detallada los mecanismos biológicos subyacentes.</li>
+<li><strong>Modelos basados en procesos</strong>. Representan la interacción entre componentes clave del sistema ecológico, pero no los mecanismos biológicos subyacentes.</li>
+</ol>
+<div id="ejemplos" class="section level3">
+<h3>Ejemplos:</h3>
+<p>El siguiente modelo es meramente estadístico:</p>
+<p><span class="math display">\[ \log S = \alpha + \beta_1 Bio_1 + \beta_2 Bio_7 + \beta_2&#39; Bio_7 ^2 + \beta_3 Bio_{12} + \beta_3&#39; Bio_{12} ^2 \]</span></p>
+<p>pues no representa de ninguna manera qué sucede con las diferentes especies bajo las diferentes condiciones climáticas.</p>
+<p>El modelo de <em>Bradypus variegatus</em> también es estadístico, sólo representa la asociación entre la densidad de puntos y las condiciones climáticas donde están presentes dichos puntos.</p>
+<p>Modelos biofísicos como el de <span class="citation">Kearney and Porter (2009)</span>, utilizan propiedades físicas de los organismos como tamaño del cuerpo, color, eficiencia de conversión de calorías y evapotranspiración para representar nichos fundamentales, lo cual logra capturar de manera parcial muchos fenómenos que subyacen a lo que representan modelos estadísticos de distribuciones geográficas.</p>
+<p>Finalmente, los componentes del sistema qeu definen los MBP, serían como el de MacArthur de biogeografía de islas, que representan el número de especies como función de la inmigración y extinción, pero omiten las dinámicas de las diferentes especies en la isla, sus interacciones, el efecto del clima y las dificultades por las que pasaron para colonizar dicha isla</p>
 <p><a href="index.html">Regresar al índice del curso</a></p>
+</div>
 </div>
 <div id="referencias" class="section level1 unnumbered">
 <h1>Referencias</h1>
 <div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-connolly2017" class="csl-entry">
+Connolly, Sean R., Sally A. Keith, Robert K. Colwell, and Carsten Rahbek. 2017. <span>“Process, <span>Mechanism</span>, and <span>Modeling</span> in <span>Macroecology</span>.”</span> <em>Trends in Ecology &amp; Evolution</em> 32 (11): 835–44. <a href="https://doi.org/10.1016/j.tree.2017.08.011">https://doi.org/10.1016/j.tree.2017.08.011</a>.
+</div>
 <div id="ref-gotelli2009" class="csl-entry">
 Gotelli, Nicholas J., Marti J. Anderson, Hector T. Arita, Anne Chao, Robert K. Colwell, Sean R. Connolly, David J. Currie, et al. 2009. <span>“Patterns and Causes of Species Richness: A General Simulation Model for Macroecology.”</span> <em>Ecology Letters</em> 12 (9): 873–86. <a href="https://doi.org/10.1111/j.1461-0248.2009.01353.x">https://doi.org/10.1111/j.1461-0248.2009.01353.x</a>.
+</div>
+<div id="ref-kearney2009" class="csl-entry">
+Kearney, Michael, and Warren Porter. 2009. <span>“Mechanistic Niche Modelling: Combining Physiological and Spatial Data to Predict Species’ Ranges.”</span> <em>Ecology Letters</em> 12 (4): 334–50. <a href="https://doi.org/10.1111/j.1461-0248.2008.01277.x">https://doi.org/10.1111/j.1461-0248.2008.01277.x</a>.
 </div>
 </div>
 </div>
