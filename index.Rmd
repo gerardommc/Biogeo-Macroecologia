@@ -38,4 +38,4 @@ Programa de [Biogeografía](Biogeografia.pdf) y de [Macroecología](Macroecologi
     - [Polígonos](Datos-diversidad-poligonos.html)
     
 2. [Aplicaciones de los sistemas de información geográfica](Aplicaciones-SIG.html)
-3. [Análisis y modelación de los sistemas ecológicos a grandes escalas espaciales y temporales](Analisis-mod-escalas.html)
+3. [Análisis y modelación de los sistemas ecológicos a grandes escalas espaciales y temporales](Analisis-modelacion-macro.html)

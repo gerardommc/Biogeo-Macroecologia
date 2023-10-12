@@ -64,6 +64,8 @@ dryad_files_download(ids = id)
 
 En el caso de PHYLACINE, es una base de datos grande, por lo que tardará unos minutos en descargar. Veremos en el tutorial de SIG, cómo podríamos usar PHYLACINE.
 
+[Regresar al índice del curso](index.html)
+
 # Referencias
 
 

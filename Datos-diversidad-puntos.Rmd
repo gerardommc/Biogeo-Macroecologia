@@ -263,4 +263,4 @@ Existen bases de datos más especializadas en grupos taxonómicos ó regiones ge
 2. North American Breeding Bird Survey ([BBS](https://www.usgs.gov/data/2022-release-north-american-breeding-bird-survey-dataset-1966-2021))
 3. Atlas of Living Australia ([ALA](https://www.ala.org.au/))
 
-[Regresar al índice](index.html)
+[Regresar al índice del curso](index.html)

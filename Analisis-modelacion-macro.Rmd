@@ -1,0 +1,52 @@
+---
+title: "Análisis y modelación de sistemas ecológicos"
+output: 
+  bookdown::html_document2:
+    toc: true
+    number_sections: false
+    toc_float: true
+    fig_caption: true
+    theme: flatly
+bibliography: Macroecologia.bib
+date: "2023-09-27"
+---
+
+En la clase anterior analizamos la riqueza de especies como función de un conjunto de variables ambientales:
+
+$$ \log S = \alpha + \beta_1 Bio_1 + \beta_2 Bio_7 + \beta_2' Bio_7 ^2 + \beta_3 Bio_{12} + \beta_3' Bio_{12} ^2 $$
+
+donde $S$ es la riqueza o número de especies en el $i-$ésimo píxel y $\alpha$ y $\beta$ son los coeficientes estimados. Vimos que este modelo capturó bien algunas tendencias bien documentadas, como que la riqueza disminuye con la distancia del ecuador. La variable que hizo posible este efecto fue $Bio_1$, puesto que la temperatura promedio anual se correlaciona negativamente con la distancia del ecuador. Las otras variables $Bio_7$ y $Bio_{12}$ representan la variabilidad de temperatura y disponibilidad de agua respectivamente.
+
+## Procesos descritos por medio del modelo
+
+### Temperatura
+
+Disponibilidad de energía, influenciada por elevación y topografía en general
+
+### Variabilidad de temperatura
+
+Amplitud del nicho ecológico, incertidumbre de las condiciones, tamaño de las áreas distribucionales, probabilidad de extinción
+
+### Disponibilidad de acua
+
+Hipótesis energía-agua.
+
+## Procesos no descritos por el modelo
+
+Efecto del área, procesos de especiación, inmigración y extinción, aislamiento.
+
+## El modelo general de simulación
+
+@gotelli2009 identificó una serie de características que debería tener un modelo de simulación general en macroecología:
+
+1. Espacialmente explícito
+2. Permite especiación
+3. Permite eventos de dispersión y brincos distribucionales
+4. Toma en cuenta límites fisiológicos de tolerancia
+
+Cada uno de estos aspectos debería ser controlable por el usuario y sería lo suficientemente general para representar los procesos que dan origen a los patrones de riqueza de muchos grupos.
+
+[Regresar al índice del curso](index.html)
+
+# Referencias
+
