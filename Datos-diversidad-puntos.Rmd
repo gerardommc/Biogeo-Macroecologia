@@ -117,7 +117,7 @@ knitr::kable(tail(sp[, c("lon", "lat")]))
 
 El procedimiento habitual, es eliminar esos datos faltantes. En **R**, podemos eliminarlos usando `na.omit`. Antes de eliminar estos datos faltantes, tenemos que crear otro `data.frame` que sólo contenga las coordenadas geográficas:
 
-```{r}
+```{r echo = T}
 xy <- subset(sp, select = c("lon", "lat"))
 xy.na <- na.omit(xy)
 ```
@@ -129,7 +129,7 @@ Otros procedimientos de limpieza son:
 
 La eliminación de duplicados es sencilla. Comenzamos multiplicando longitud y latitud, y usamos el producto para ver cuáles datos no son únicos:
 
-```{r}
+```{r echo=T}
 p <- with(xy.na, lon * lat)
 xy.na$p <- p
 xy.unicos <- unique(xy.na)
@@ -162,9 +162,9 @@ Una vez eliminados los puntos, podemos guardar la base de datos limpia como `csv
 
 ```{r echo = T, eval = F}
 write.csv(xy.corr, "Datos/Cachryx.csv", row.names = F)
-writeVector(vect(xy.corr[, c("lon", "lat")]), filename = "Datos/Cachryx.gpkg", filetype = "GPKG")
+writeVector(vect(xy.corr[, c("lon", "lat")]), 
+            filename = "Datos/Cachryx.gpkg", filetype = "GPKG")
 ```
-
 
 ## Naturalista
 
