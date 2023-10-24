@@ -255,6 +255,18 @@ xy.3 <- subset(sp3$data, select = c("decimallatitude", "decimallongitude"),
 
 El resto del proceso de limpieza de los datos es igual a GBIF.
 
+## Juntando las bases de datos
+
+```{r echo = T}
+names(xy.corr)
+names(xy.1) <- c("lon", "lat")
+xy.1$p <- NA
+
+todos <- rbind(xy.corr, xy.1)
+head(todos)
+```
+
+
 ## Otras bases de datos (no de menor importancia)
 
 Existen bases de datos más especializadas en grupos taxonómicos ó regiones geográficas. Algunas bases de datos son increíblemente detalladas espacial y temporalmente:

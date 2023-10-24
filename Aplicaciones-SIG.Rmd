@@ -115,7 +115,7 @@ El sistema de referencia de las coordenadas es importante cuando necesitamos cal
 Importaremos aquí las distribuciones de mamíferos de PHYLACINE, para hacer un análisis de las variables ambientales a que está asociada la riqueza. Comenzaremos importando las distribuciones con la función `rast` de `terra`. A esta función le podemos dar uno ó cientos de nombres de archivos para generar una capa raster con múltiples bandas. La lista de archivos podemos crearla con `list.files`:
 
 ```{r echo = T}
-f <- list.files("../Current/Current/", pattern = ".tif", full.names = T)
+f <- list.files("Datos/Current/Current/", pattern = ".tif", full.names = T)
 length(f)
 ```
 
@@ -143,7 +143,7 @@ Como podemos ver, estos datos contienen las especies marinas y terrestres. Podr�
 ```{r echo = T, fig.align='center', fig.height=3, fig.width=6, message=FALSE, warning=F}
 library(maptools)
 data("wrld_simpl")
-m <- vect(wrld_simpl)
+m <- vect("Datos/Mundo.gpkg")
 m <- project(m, "EPSG:4326")
 plot(m)
 ```
@@ -157,7 +157,7 @@ plot(riq.ter)
 Ahora, importaremos las variables bioclimáticas de [Chelsa](https://envicloud.wsl.ch/#/?prefix=chelsa%2Fchelsa_V2%2FGLOBAL%2F) para usar como variables independientes de nuestro modelo de regresión. De Chelsa usaremos las variables bioclimáticas 1, 7 y 12 (temperatura anual promedio, rango anual de temperatura y precipitación total). Estas variables también están en formato `tif` y las podemos importar y proyectar con `terra`:
 
 ```{r echo=T, fig.height=3, fig.width=6, fig.align='center'}
-bio <- rast(paste0("../Current/bio",c(1, 7, 12), ".tif"))
+bio <- rast("Datos/Chelsa-bio1-7-12.tif")
 bio.res <- resample(bio, riq, method = "lanczos")
 bio.res <- mask(bio.res, m)
 plot(bio.res)
@@ -172,6 +172,7 @@ bio.88 <- project(bio.res, "EPSG:8857")
 
 riq.88 <- mask(riq.88, m.88)
 bio.88 <- mask(bio.88, m.88)
+plot(riq.88)
 ```
 
 Transformando de raster a tabla:
@@ -180,6 +181,7 @@ Transformando de raster a tabla:
 todos <- c(bio.88, riq.88)
 riq.df <- as.data.frame(todos, xy = T)
 riq.df$sum <- round(riq.df$sum, 0)
+riq.df <- na.omit(riq.df)
 knitr::kable(head(riq.df))
 ```
 
